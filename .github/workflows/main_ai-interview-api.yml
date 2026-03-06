@@ -63,4 +63,4 @@ jobs:
         with:
           app-name: 'ai-interview-api'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2CC2BB2FACC94B948CC1AFD9CBFDA450 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3BB97A58571946B6942F1C81FBAC8D6D }}
