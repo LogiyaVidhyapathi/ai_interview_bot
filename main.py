@@ -9,7 +9,7 @@ APP_ID = os.getenv("MicrosoftAppId", "")
 APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
 
 settings = BotFrameworkAdapterSettings(APP_ID, APP_PASSWORD)
-adapter = BotFrameworkAdapter(adapter_settings)
+adapter = BotFrameworkAdapter(settings)
 
 @app.get("/")
 async def root():
@@ -28,3 +28,4 @@ async def messages(req: Request):
     )
 
     return {"status": "ok"}
+
