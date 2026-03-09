@@ -8,28 +8,23 @@ app = FastAPI()
 APP_ID = os.getenv("MicrosoftAppId", "")
 APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
 
-adapter_settings = BotFrameworkAdapterSettings(APP_ID, APP_PASSWORD)
+settings = BotFrameworkAdapterSettings(APP_ID, APP_PASSWORD)
 adapter = BotFrameworkAdapter(adapter_settings)
 
-async def on_message_activity(turn_context: TurnContext):
-    await turn_context.send_activity("Hello from AI Interview Bot")
-
 @app.get("/")
-async def home():
+async def root():
     return {"message": "AI Interview Bot Running"}
 
 @app.post("/api/messages")
 async def messages(req: Request):
     body = await req.json()
-
     activity = Activity().deserialize(body)
-    auth_header = req.headers.get("Authorization", "")
 
-    response = await adapter.process_activity(
-        activity, auth_header, on_message_activity
+    async def turn_logic(turn_context: TurnContext):
+        await turn_context.send_activity("Hello from AI Interview Bot")
+
+    await adapter.process_activity(
+        activity, "", turn_logic
     )
-
-    if response:
-        return response.body
 
     return {"status": "ok"}
