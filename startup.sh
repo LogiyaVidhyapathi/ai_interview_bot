@@ -1,1 +1,2 @@
-gunicorn -k uvicorn.workers.UvicornWorker main:app --bind=0.0.0.0:$PORT --timeout 600
+#!/bin/bash
+gunicorn -k uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000 main:app
