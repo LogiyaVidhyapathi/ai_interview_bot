@@ -20,12 +20,15 @@ async def messages(req: Request):
     body = await req.json()
     activity = Activity().deserialize(body)
 
+    auth_header = req.headers.get("Authorization", "")
+
     async def turn_logic(turn_context: TurnContext):
         await turn_context.send_activity("Hello from AI Interview Bot")
 
     await adapter.process_activity(
-        activity, "", turn_logic
+        activity, auth_header, turn_logic
     )
 
     return {"status": "ok"}
+
 
