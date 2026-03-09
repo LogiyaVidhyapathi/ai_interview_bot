@@ -5,10 +5,15 @@ import os
 
 app = FastAPI()
 
-APP_ID = os.getenv("MicrosoftAppId", "")
-APP_PASSWORD = os.getenv("MicrosoftAppPassword", "")
+APP_ID = os.getenv("MicrosoftAppId")
+APP_PASSWORD = os.getenv("MicrosoftAppPassword")
+APP_TENANT = os.getenv("MicrosoftAppTenantId")
 
-settings = BotFrameworkAdapterSettings(APP_ID, APP_PASSWORD)
+settings = BotFrameworkAdapterSettings(
+    APP_ID, 
+    APP_PASSWORD, 
+    channel_auth_tenant=APP_TENANT
+)
 adapter = BotFrameworkAdapter(settings)
 
 @app.get("/")
@@ -30,5 +35,6 @@ async def messages(req: Request):
     )
 
     return Response(status_code=200)
+
 
 
