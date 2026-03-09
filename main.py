@@ -29,6 +29,6 @@ async def messages(req: Request):
         activity, auth_header, turn_logic
     )
 
-    return {"status": "ok"}
+    return Response(status_code=200)
 
 
